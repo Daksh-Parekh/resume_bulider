@@ -10,6 +10,6 @@ class ButtonOptionPage extends StatefulWidget {
 class _ButtonOptionPageState extends State<ButtonOptionPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

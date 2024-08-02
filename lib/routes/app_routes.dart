@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:resume_bulider/views/buildoption/build_option.dart';
 import 'package:resume_bulider/views/homepage/homepage.dart';
+import 'package:resume_bulider/views/splash_screen/splash_screen.dart';
 
 class AppRoutes {
-  static String homePage = "/";
+  static String splashScreen = "/";
+  static String homePage = "home_page";
   static String buidOptionPage = "buid_options_page";
 
   static String iconPath = "lib/assets/icons/";
@@ -66,6 +68,7 @@ class AppRoutes {
   ];
 
   static Map<String, Widget Function(BuildContext)> routes = {
+    splashScreen: (context) => SplashScreen(),
     homePage: (context) => Homepage(),
     buidOptionPage: (context) => ButtonOptionPage()
   };
