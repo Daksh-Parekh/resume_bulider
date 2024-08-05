@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:resume_bulider/routes/app_routes.dart';
 
 void main() {
-  runApp(MyApp(),);
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.black,
+    ),
+  );
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
