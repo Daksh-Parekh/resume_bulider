@@ -4,12 +4,12 @@ import 'package:resume_bulider/routes/app_routes.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: Colors.black,
     ),
   );
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
