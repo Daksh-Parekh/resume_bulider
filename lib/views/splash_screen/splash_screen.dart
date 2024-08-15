@@ -26,9 +26,10 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
+        // child: Image.asset('lib/assets/gif/Resume_folder.gif'),
         child: kIsWeb
-            ? Image.asset("lib/assets/gif/Resume_folder.gif")
-            : Image.network("lib/assets/gif/Resume_folder.gif"),
+            ? Image.asset('lib/assets/gif/Resume_folder.gif')
+            : Image.network('lib/assets/gif/Resume_folder.gif'),
       ),
     );
   }
