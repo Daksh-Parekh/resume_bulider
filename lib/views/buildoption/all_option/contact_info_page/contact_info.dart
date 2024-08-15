@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:resume_bulider/utils/extension.dart';
 import 'package:resume_bulider/utils/globals.dart';
 
@@ -38,6 +40,7 @@ class _ContactInfoState extends State<ContactInfo> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus!.unfocus();
@@ -419,15 +422,125 @@ class _ContactInfoState extends State<ContactInfo> {
                       ),
                     ),
                     //Photo
-                    Column(
-                      children: [
-                        Text("Name : ${Globals.name}"),
-                        Text("Email : ${Globals.email}"),
-                        Text("Contact : ${Globals.contact}"),
-                        Text("Address : ${Globals.address}"),
-                        Text("Password : ${Globals.password}"),
-                      ],
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 3,
+                            offset: Offset(3, 3),
+                          ),
+                        ],
+                      ),
+                      height: size.height * 0.3,
+                      // width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          CircleAvatar(
+                            radius: 80,
+                            foregroundImage: Globals.image != null
+                                ? FileImage(Globals.image!)
+                                : null,
+                          ),
+                          FloatingActionButton.small(
+                            onPressed: () {
+                              ImagePicker picker = ImagePicker();
+
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Select Options"),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icon(Icons.close_rounded),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            MaterialButton(
+                                              onPressed: () async {
+                                                XFile? gallerys =
+                                                    await picker.pickImage(
+                                                        source: ImageSource
+                                                            .gallery);
+                                                if (gallerys != null) {
+                                                  log("Image Received");
+                                                  Globals.image =
+                                                      File(gallerys.path);
+                                                  setState(() {});
+                                                } else {
+                                                  log("Image Not Found");
+                                                }
+                                                Navigator.pop(context);
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.photo),
+                                                  Text("Gallery"),
+                                                ],
+                                              ),
+                                            ),
+                                            MaterialButton(
+                                              onPressed: () async {
+                                                XFile? file =
+                                                    await picker.pickImage(
+                                                        source:
+                                                            ImageSource.camera);
+                                                if (file != null) {
+                                                  log("Image Received");
+                                                  Globals.image =
+                                                      File(file.path);
+                                                  setState(() {});
+                                                } else {
+                                                  log("Image Not Found");
+                                                }
+                                                Navigator.pop(context);
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                      Icons.camera_alt_rounded),
+                                                  Text("Camera"),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            backgroundColor: Colors.blue.shade200,
+                            focusColor: Colors.blue,
+                            child: Icon(Icons.camera_alt_rounded),
+                          ),
+                        ],
+                      ),
                     ),
+                    // Column(
+                    //   children: [
+                    // Text("Name : ${Globals.name}"),
+                    // Text("Email : ${Globals.email}"),
+                    // Text("Contact : ${Globals.contact}"),
+                    // Text("Address : ${Globals.address}"),
+                    // Text("Password : ${Globals.password}"),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
