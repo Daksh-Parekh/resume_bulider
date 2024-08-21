@@ -1,6 +1,8 @@
 import 'dart:io';
 
 class Globals {
-  static String? name, email, contact, address, password;
+  static String? name, email, contact, address, password, gender;
   static File? image;
+  static bool isChecked = false;
+  static List<String> languages = [];
 }

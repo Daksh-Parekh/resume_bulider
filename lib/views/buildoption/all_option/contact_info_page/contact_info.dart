@@ -527,7 +527,7 @@ class _ContactInfoState extends State<ContactInfo> {
                             },
                             backgroundColor: Colors.blue.shade200,
                             focusColor: Colors.blue,
-                            child: Icon(Icons.camera_alt_rounded),
+                            child: Icon(Icons.add_a_photo_rounded),
                           ),
                         ],
                       ),
